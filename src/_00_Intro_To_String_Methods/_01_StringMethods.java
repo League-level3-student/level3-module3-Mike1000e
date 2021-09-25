@@ -1,6 +1,8 @@
 package _00_Intro_To_String_Methods;
 
+import java.util.Arrays;
 import java.util.Base64;
+import java.util.concurrent.atomic.AtomicIntegerArray;
 
 /*
  * Visit the JavaDocs for the String class to view everything you can do with a String.
@@ -61,43 +63,81 @@ public class _01_StringMethods {
     // assume there is only one space between the first and last name
     public static String lineLeader(String s1, String s2, String s3) {
     
-			
-				s1 = s1.replace(" ", "");
-				s2 = s2.replace(" ", "");
-				s3 = s3.replace(" ", "");
-System.out.println(s1);
-    	char s1last = s1.charAt(s1.length()-1);
-    	char s2last = s2.charAt(s2.length()-1);
-    	char s3last = s3.charAt(s3.length()-1);
-    		
-        return null;
+    String es1 = s1.trim();
+	String es2 = s2.trim();
+	String es3 = s3.trim();
+	
+	int s11 = es1.indexOf(' ');
+    int s22 = es2.indexOf(' ');
+    int s33 = es3.indexOf(' ');
+    
+    es1 = es1.substring(s11);
+    es2	= es2.substring(s22);		
+    es3	= es3.substring(s33);
+   
+    if(es1.compareTo(es2)<0) {
+    	if(es1.compareTo(es3)<0) {
+    		return s1.trim();
+    	}else {
+    		return s3.trim();
+    	}
+    }else {
+    	if(es2.compareTo(es3)<0){
+    		return s2.trim();
+    	}else {
+    		return s3.trim();
+    	}
+    
+    	//		use trim method to get rid of spaces. Then find the index of the space, then create a string based on he substring of 1 after the space to the end of the string.
+    }
     }
 
     // Return the sum of all numerical digits in the String
     public static int numeralSum(String s) {
-        return 0;
+    
+    	int sum = 0;
+    	
+    	for(int i =0; i < s.length(); i++) {
+    		char a = s.charAt(i);
+    	if(Character.isDigit(a) == true) {
+    		sum = sum + Integer.parseInt(a+"");
+    	}
+    		}
+        return sum;
     }
 
     // Return the number of times String substring appears in String s
     public static int substringCount(String s, String substring) {
+    	
         return 0;
     }
 
     // Call Utilities.encrypt at the bottom of this file to encrypt String s
     public static String encrypt(String s, char key) {
-        return null;
+    	return Utilities.encrypt(s.getBytes(), (byte)key);
+      
     }
 
     // Call Utilities.decrypt at the bottom of this file to decrypt the
     // cyphertext (encrypted text)
     public static String decrypt(String s, char key) {
-        return null;
+    	return Utilities.decrypt(s, (byte)key);
+      
     }
 
     // Return the number of words in String s that end with String substring
     // You can assume there are no punctuation marks between words
     public static int wordsEndsWithSubstring(String s, String substring) {
-        return 0;
+    	int answer = 0;
+    	String[]arr = s.split(" ");
+    	for(int i = 0; i<arr.length; i ++) {
+    		if(arr[i].contains("ly")){
+    			answer = answer+1;
+    		}
+    		
+    	}
+        return answer;
+        
     }
 
     // Given String s, return the number of characters between the first
